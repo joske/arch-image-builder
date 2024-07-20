@@ -1,0 +1,14 @@
+name: Generic x86_64 compatible PC
+arch: aarch64
+pacman:
+  install:
+    - linux
+    - fastfetch
++also:
+  - os/archlinuxarm
+  - packages/openssh
+  - packages/network-manager
+  - packages/systemd-networkd
+  - packages/nvim
+  - shell/fish
+  - desktop/gnome

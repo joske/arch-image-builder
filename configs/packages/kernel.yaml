@@ -1,0 +1,17 @@
+filesystem:
+  files:
+    - path: /boot/x1e80100-lenovo-yoga-slim7x-next.dtb
+      source: configs/files/x1e80100-lenovo-yoga-slim7x-next.dtb
+    - path: /boot/Image.gz
+      stage: post-build
+      source: configs/files/Image.gz
+    - path: /boot/initramfs-linux.img
+      stage: post-build
+      source: configs/files/initramfs-linux
+    - path: /boot/initramfs-linux-fallback.img
+      stage: post-build
+      source: configs/files/initramfs-linux
+    - path: /usr/lib/firmware/ath12k
+      folder: true
+      stage: post-build
+      source: configs/files/ath12k

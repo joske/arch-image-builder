@@ -94,7 +94,6 @@ pacman:
   - sof-firmware
   - squashfs-tools
   - sudo
-  - syslinux
   - systemd-resolvconf
   - tcpdump
   - terminus-font
@@ -114,7 +113,6 @@ pacman:
   - wvdial
   - xfsprogs
   - xl2tpd
-  - edk2-shell
 
 sysconf:
   hosts:
@@ -371,14 +369,6 @@ scripts:
     fonts="$$out/grub/fonts"
     mkdir -pv "$$fonts"
     cp "${rootfs}/usr/share/grub"/*.pf2 "$$fonts/"
-
-# EDK2 EFI Shell
-- stage: post-fs
-  code: |
-    cp "${rootfs}/usr/share/edk2-shell/x64/Shell_Full.efi" "${output}/boot/shellx64.efi"
-    cp "${rootfs}/usr/share/edk2-shell/ia32/Shell_Full.efi" "${output}/boot/shellia32.efi"
-    cp "${rootfs}/usr/share/edk2-shell/aarch64/Shell_Full.efi" "${output}/boot/shellaa64.efi"
-    cp "${rootfs}/usr/share/edk2-shell/arm/Shell_Full.efi" "${output}/boot/shellarm.efi"
 
 # GRUB2 UEFI boot image and boot sector
 - stage: pre-image

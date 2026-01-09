@@ -1,0 +1,40 @@
+#
+# Server Base System Architecture
+#
+
+name: Asahi Alarm
+device: asahi-alarm
+
+pacman:
+  install:
+  - fastfetch
+  - mkinitcpio
+
+kernel:
+  cmdline:
+  - panic=30
+  - loglevel=8
+  - add_efi_memmap
+  path: /boot
+
++also:
+- os/asahi-alarm
+- repo/asahi-alarm
+
+# Universal Mainline Kernel
+- packages/linux-asahi
+
+# Network Daemon
+- packages/systemd-networkd
+
+# OpenSSH Server
+- packages/openssh
+
+# Text editor
+- packages/editor
+
+# Root without password
+- common/wheel-nopasswd
+
+# Reinitialize pacman-key when boot
+- common/pacman-init

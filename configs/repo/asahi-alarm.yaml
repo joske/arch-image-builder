@@ -1,0 +1,29 @@
+pacman:
+  repo:
+  - name: asahi-alarm
+    priority: 90
+    server: https://github.com/asahi-alarm/asahi-alarm/releases/download/$$arch
+    mirrorlist: distro:asahi-alarm
+  - name: core
+    priority: 100
+    server: http://mirror.archlinuxarm.org/$$arch/$$repo
+    mirrorlist: distro:archlinuxarm
+  - name: extra
+    priority: 110
+    server: http://mirror.archlinuxarm.org/$$arch/$$repo
+    mirrorlist: distro:archlinuxarm
+  - name: alarm
+    priority: 120
+    server: http://mirror.archlinuxarm.org/$$arch/$$repo
+    mirrorlist: distro:archlinuxarm
+  - name: aur
+    priority: 130
+    server: http://mirror.archlinuxarm.org/$$arch/$$repo
+    mirrorlist: distro:archlinuxarm
+  trust:
+    - asahi-alarm-keyring@localhost
+    - builder@archlinuxarm.org
+  install:
+  - asahi-alarm/asahi-alarm-keyring
+  - core/archlinuxarm-keyring
+  - core/archlinux-keyring

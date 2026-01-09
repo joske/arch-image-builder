@@ -1,0 +1,20 @@
+distro:
+  name: Asahi Arch Linux ARM
+  id: asahi-alarm
+  identifier:
+    name: AsahiAlarm
+    id: asahi-alarm
+pacman:
+  install:
+  - core/base
+  - linux-asahi
+  - asahi-meta
+sysconf:
+  hosts:
+  - 127.0.0.1 localhost
+  - 127.0.1.1 alarm
+  hostname: alarm
++also:
+- repo/asahi-alarm
+- repo/archlinuxarm
+- common/alarm-user

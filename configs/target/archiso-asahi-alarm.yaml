@@ -1,0 +1,58 @@
+name: ArchISO for ARM64 SBSA
+target: archiso-asahi-alarm
+arch: aarch64
+
+image:
+# RootFS image
+- type: filesystem
+  output: arch/${arch}/airootfs.sfs
+  fstype: squashfs
+  args: ["-comp", "xz", "-Xbcj", "arm", "-b", "1M", "-Xdict-size", "1M"]
+  path: /
+
+# UEFI boot
+- type: filesystem
+  output: boot/efi.img
+  fstype: fat12
+  size: 2MiB
+  mount: /efi
+
+kernel:
+  kernel: vmlinuz-linux-asahi
+  initramfs: initramfs-linux-asahi.img
+
+grub:
+  path: /boot/grub
+  config: no
+  targets:
+  - arm64-efi
+
+bootloader:
+  timeout: 3
+  method:
+  - grub
+
+filesystem:
+  files:
+  - path: /etc/mkinitcpio.d/linux-asahi.preset
+    stage: pre-initramfs
+    content: |
+      PRESETS=('archiso')
+      ALL_kver='/boot/${kernel.kernel}'
+      archiso_config='/etc/mkinitcpio.conf.d/archiso.conf'
+      archiso_image="/boot/${kernel.initramfs}"
+
+scripts:
+- stage: pre-initramfs
+  code: |
+    rm -f ${rootfs}/boot/initramfs-linux-asahi.img
+    rm -f ${rootfs}/boot/initramfs-linux-asahi-fallback.img
+
+- stage: post-fs
+  code: |
+    rm -rf --one-file-system "${output}/boot/dtbs"
+    cp -a "${rootfs}/boot/dtbs" "${output}/boot/dtbs"
+
++also:
+- device/asahi-alarm
+- common/archiso-aarch64
